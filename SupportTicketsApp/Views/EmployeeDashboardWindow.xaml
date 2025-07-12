@@ -1,0 +1,28 @@
+﻿<Window x:Class="SupportTicketsApp.Views.EmployeeDashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupportTicketsApp.Views"
+        mc:Ignorable="d"
+       Title="Личный кабинет сотрудника" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Добро пожаловать, [Имя сотрудника]!" Margin="10" FontSize="16" FontWeight="Bold"/>
+
+        <DataGrid Grid.Row="1" Name="TicketsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер заявки" Binding="{Binding TicketId}" Width="SizeToHeader"/>
+                <DataGridTextColumn Header="Тема" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.ClientName}" Width="*"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status.StatusName}" Width="SizeToHeader"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedDate}" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
