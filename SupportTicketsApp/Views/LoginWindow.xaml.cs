@@ -32,6 +32,25 @@ namespace SupportTicketsApp.Views
             _viewModel = new LoginViewModel();
             DataContext = _viewModel;
         }
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+
+            else
+                WindowState = WindowState.Normal;
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
