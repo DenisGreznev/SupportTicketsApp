@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
     <Grid>
-        <StackPanel Margin="20">
+        <StackPanel Margin="25">
             
             <TextBox Name="LoginTextBox" Margin="0,30,0,10"
                     

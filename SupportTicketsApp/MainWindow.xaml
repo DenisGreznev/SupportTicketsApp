@@ -4,9 +4,108 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportTicketsApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="TicketMaster" Height="825" Width="1320"
+        MinHeight="825" MinWidth="1300"
+         Background="Transparent" AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip" WindowState="Normal"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" Closing="home_Closing" Loaded="home_Loaded_1">
+    <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!-- Начало: GridColum Левый-->
+            <Border CornerRadius="8 0 0 8" Background="{DynamicResource SecundaryBackgroundColor}">
+                <Grid x:Name="gridMenu" Width="250">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!-- Меню -->
+                    <ToggleButton x:Name="btnMenu"  HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" VerticalAlignment="Center" Style="{StaticResource MenuIconStyle}" Margin="0 0 15 0">
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="gridMenu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="250" To="55" Duration="0:0:0.3">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="gridMenu" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="55" To="250" Duration="0:0:0.3">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                    <StackPanel Grid.Row="3">
+                        <RadioButton x:Name="rdZayavki" FontSize="18" IsChecked="True"  Content="Заявки" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdZayavki_Click" Cursor="Hand"/>
+                        <RadioButton x:Name="rdKlients" FontSize="18"  Content="Клиенты"  Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Click="rdKlients_Click" Cursor="Hand"/>
+                    
+                        <RadioButton x:Name="rdSotrudniki" FontSize="18" Content="Сотрудники" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource products}" Margin="0 5 0 5" Click="rdSotrudniki_Click"/>
+                        <RadioButton x:Name="rdOtch" FontSize="18" Content="Отчеты" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource supplier}" Margin="0 5 0 5" Click="rdOtch_Click" Cursor="Hand"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <!-- Конец: GridColum Левый-->
+            <!-- Начало: GridColumn Правый -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="51"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"  Margin="0,5,120,1" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                    <StackPanel Margin="6,0,0,0" Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <Button HorizontalAlignment="Left" x:Name="buttondob"  Content="+ Новая заявка" Foreground="White" Background="ForestGreen" Style="{StaticResource MaterialDesignFlatLightBgButton}" 
+                         materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="0" 
+                         Width="150" Height="35" Click="buttondob_Click"   />
+                        </StackPanel>
+                        
+                    </StackPanel>
+                    
+                    
+                    
+
+
+                </Border>
+                <!-- Начало: Закрытие | Во весь экран | Минимизировать -->
+                <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="37" Orientation="Horizontal" FlowDirection="RightToLeft" Width="250">
+                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                    <Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                                <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                        <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+                    <Button x:Name="buttonprofile" Margin="15,0,0,0" Content="Личный кабинет" Foreground="Black" Background="Transparent" Style="{StaticResource MaterialDesignFlatLightButton}" 
+                         materialDesign:ButtonAssist.CornerRadius="10" BorderBrush="White" BorderThickness="2" 
+                         Width="150" Height="35" Click="buttonprofile_Click"   />
+                </StackPanel>
+                <!-- Конец: Закрытие | Во весь экран | Минимизировать -->
+                <Border Grid.Row="1" Margin="10,10,10,10">
+                    <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden">
+                        <!-- Страницы -->
+                    </Frame>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>
