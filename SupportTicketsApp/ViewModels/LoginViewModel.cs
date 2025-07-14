@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace SupportTicketsApp.ViewModels
 {
+    public static class UserSession
+    {
+        public static string LoggedInUser { get; set; }
+    }
     public class LoginViewModel
     {
         private string _login;
@@ -52,6 +56,7 @@ namespace SupportTicketsApp.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
 
         public bool LoginCommand(ApplicationDbContext dbContext)
         {
@@ -69,6 +74,7 @@ namespace SupportTicketsApp.ViewModels
             // 2. Проверяем, найден ли сотрудник
             if (employee != null)
             {
+                UserSession.LoggedInUser = Login;
                 // Авторизация успешна
                 return true;
             }

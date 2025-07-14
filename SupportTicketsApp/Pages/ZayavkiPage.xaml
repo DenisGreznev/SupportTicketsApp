@@ -5,9 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SupportTicketsApp.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:iconAwesome="http://schemas.fontawesome.io/icons/"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d" 
-      d:DesignHeight="674.938" d:DesignWidth="1185.3" Background="{DynamicResource SecundaryBackgroundColor}"
+      d:DesignHeight="674.938" d:DesignWidth="1000" Background="{DynamicResource SecundaryBackgroundColor}"
       Title="ZayavkiPage">
+
+   
 
     <Grid>
         <Grid.RowDefinitions>
@@ -31,15 +35,54 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1"  Margin="16,23,10,0" Height="329" VerticalAlignment="Top">
-            <DataGrid HorizontalAlignment="Left" AutoGenerateColumns="False" x:Name="datagrid" Height="310" Width="NaN" Loaded="datagrid_Loaded" IsReadOnly="True" SelectionChanged="datagrid_SelectionChanged" Background="{DynamicResource SecundaryBackgroundColor}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Номер" Binding="{Binding TicketId}" Width="SizeToHeader"/>
-                    <DataGridTextColumn Header="Тема" Binding="{Binding Title}" Width="*"/>
-                    <DataGridTextColumn Header="Клиент" Binding="{Binding Client.ClientName}" Width="*"/>
-                    <DataGridTextColumn Header="Ответственный" Binding="{Binding Employee.FullName}" Width="*"/>
-                    <DataGridTextColumn Header="Статус" Binding="{Binding Status.StatusName}" Width="SizeToHeader"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ScrollViewer>
+                <DataGrid SelectionUnit="FullRow" SelectionMode="Single" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Disabled" AutoGenerateColumns="False" x:Name="datagrid" Height="310" Width="NaN" ItemsSource="{Binding Tickets}" IsReadOnly="True" Background="{DynamicResource SecundaryBackgroundColor}" MouseDoubleClick="datagrid_MouseDoubleClick" LoadingRow="datagrid_LoadingRow">
+                    
+                    
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status.StatusName}" Value="Открыта">
+                                    <Setter Property="Background" Value="#d0f3ce"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status.StatusName}" Value="В работе">
+                                    <Setter Property="Background" Value="#f3f5d8"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status.StatusName}" Value="Решена">
+                                    <Setter Property="Background" Value="#85e985"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status.StatusName}" Value="Закрыта">
+                                    <Setter Property="Background" Value="#f4d0d0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="" Width="20">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Width="10" Background="{Binding RowColor}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Номер" Binding="{Binding TicketId}" Width="SizeToHeader"/>
+                        <DataGridTextColumn Header="Тема" Binding="{Binding Title}" Width="*"/>
+                        <DataGridTextColumn Header="Клиент" Binding="{Binding Client.ClientName}" Width="*"/>
+                        <DataGridTextColumn Header="Ответственный" Binding="{Binding Employee.FullName}" Width="250"/>
+                        <DataGridTextColumn Header="Статус" Binding="{Binding Status.StatusName}" Width="100"/>
+                        <DataGridTemplateColumn Width="Auto" Header="Действия">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Background="Transparent" BorderBrush="Transparent" Click="EditButton_Click" Tag="{Binding TicketId}" Padding="0">
+                                        <fa:FontAwesome Icon="Gear" FontSize="30" Background="Transparent" Foreground="Gray"/>
+                                        <!-- Используем FontAwesome -->
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Page>

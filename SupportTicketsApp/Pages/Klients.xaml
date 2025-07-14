@@ -1,0 +1,41 @@
+﻿<Page x:Class="SupportTicketsApp.Pages.Klients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SupportTicketsApp.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="674.938" d:DesignWidth="1185.3" Background="{DynamicResource SecundaryBackgroundColor}"
+      Title="KlientsPage">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Панель фильтров -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Поиск:" Margin="10,0,5,0" VerticalAlignment="Center"/>
+                <TextBox x:Name="SearchTextBox" Width="150" TextChanged="SearchTextBox_TextChanged"/>
+                <Button Margin="30,0,5,0"  HorizontalAlignment="Left" x:Name="buttondobklient"  Content="+ Добавить" Foreground="White" Background="ForestGreen" Style="{StaticResource MaterialDesignFlatLightBgButton}" 
+materialDesign:ButtonAssist.CornerRadius="10" BorderThickness="0" 
+Width="150" Height="35" Click="buttondobklient_Click"   />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"  Margin="16,23,10,0" Height="329" VerticalAlignment="Top">
+
+                <DataGrid HorizontalAlignment="Left" AutoGenerateColumns="False" x:Name="datagrid" Height="310" Width="NaN" IsReadOnly="True" Background="{DynamicResource SecundaryBackgroundColor}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер клиента" Binding="{Binding ClientId}" Width="SizeToHeader"/>
+                        <DataGridTextColumn Header="Название" Binding="{Binding ClientName}" Width="*"/>
+                        <DataGridTextColumn Header="Контактное лицо" Binding="{Binding ContactPerson}" Width="*"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

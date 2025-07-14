@@ -1,14 +1,20 @@
-﻿using System;
+﻿using SupportTicketsApp.Models;
+using SupportTicketsApp.Pages;
+using SupportTicketsApp.ViewModels;
+using SupportTicketsApp.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Profile;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -20,9 +26,24 @@ namespace SupportTicketsApp
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public Employee LoggedInEmployee { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded; // Подписываемся на событие Loaded
+                                              // TODO: Получите логин авторизованного пользователя из вашей системы аутентификации
+
+            // Найдите TextBox в XAML и установите его текст
+            textlogin.Text = UserSession.LoggedInUser;
+        }
+       
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (LoggedInEmployee != null)
+            {
+                textlogin.Text = LoggedInEmployee.Login; // Изменяем текст кнопки
+            }
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -55,14 +76,14 @@ namespace SupportTicketsApp
         {
             // PagesNavigation.Navigate(new HomePage());
 
-            PagesNavigation.Navigate(new System.Uri("Pages/KlientsPage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/Klients.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdSotrudniki_Click(object sender, RoutedEventArgs e)
         {
             // PagesNavigation.Navigate(new HomePage());
 
-            PagesNavigation.Navigate(new System.Uri("Pages/SotrudnikiPage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/SotrPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdOtch_Click(object sender, RoutedEventArgs e)
@@ -96,12 +117,43 @@ namespace SupportTicketsApp
 
         private void buttondob_Click(object sender, RoutedEventArgs e)
         {
+            // 1. Затемняем фон
+            this.IsEnabled = false; // Отключаем главное окно (это делает его неактивным)
+            // Можно использовать эффект размытия, но это может снижать производительность:
+            // Effect = new BlurEffect() { Radius = 10 };
+            Effect = new BlurEffect() { Radius = 10 };
+            // 2. Создаем и показываем окно ZayavkaAdd как модальное
+            ZayavkaAdd zayavkaAddWindow = new ZayavkaAdd();
+            zayavkaAddWindow.Owner = this; //  Устанавливаем владельца, чтобы окно было модальным
 
+            bool? result = zayavkaAddWindow.ShowDialog(); // ShowDialog - модальный режим
+            
+            // 3.  После закрытия ZayavkaAddWindow
+            this.IsEnabled = true;  // Включаем главное окно обратно
+            //  Удаляем эффект размытия, если он был
+            // Effect = null;
+            Effect = null;
+            // 4.  Обработка результата, если необходимо (например, если ZayavkaAddWindow
+            //    возвращает результат, указывающий на успешное сохранение данных)
+            if (result == true)
+            {
+                // Обработка успешного сохранения (если применимо)
+            }
+        }
+        public static class EmployeeContext
+        {
+            public static Employee CurrentEmployee { get; set; }
         }
 
         private void buttonprofile_Click(object sender, RoutedEventArgs e)
         {
 
+            PagesNavigation.Navigate(new System.Uri("Pages/lk.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void rdlk_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(new System.Uri("Pages/lk.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

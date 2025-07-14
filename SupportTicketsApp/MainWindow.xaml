@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupportTicketsApp"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:SupportTicketsApp.ViewModels"
         mc:Ignorable="d"
-        Title="TicketMaster" Height="825" Width="1320"
+        Title="TicketMaster" Height="825" Width="1350"
         MinHeight="825" MinWidth="1300"
          Background="Transparent" AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip" WindowState="Normal"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Closing="home_Closing" Loaded="home_Loaded_1">
+
+ 
+
+
     <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -53,6 +57,7 @@
                     
                         <RadioButton x:Name="rdSotrudniki" FontSize="18" Content="Сотрудники" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource products}" Margin="0 5 0 5" Click="rdSotrudniki_Click"/>
                         <RadioButton x:Name="rdOtch" FontSize="18" Content="Отчеты" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource supplier}" Margin="0 5 0 5" Click="rdOtch_Click" Cursor="Hand"/>
+                        
                     </StackPanel>
                 </Grid>
             </Border>
@@ -95,9 +100,8 @@
                         </Button.Style>
                     </Button>
                     <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
-                    <Button x:Name="buttonprofile" Margin="15,0,0,0" Content="Личный кабинет" Foreground="Black" Background="Transparent" Style="{StaticResource MaterialDesignFlatLightButton}" 
-                         materialDesign:ButtonAssist.CornerRadius="10" BorderBrush="White" BorderThickness="2" 
-                         Width="150" Height="35" Click="buttonprofile_Click"   />
+                    <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" x:Name="textlogin" />
+                    <ContentControl Grid.Row="1" Name="MainContent"/>
                 </StackPanel>
                 <!-- Конец: Закрытие | Во весь экран | Минимизировать -->
                 <Border Grid.Row="1" Margin="10,10,10,10">

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace SupportTicketsApp.Models
 {
@@ -43,5 +44,7 @@ namespace SupportTicketsApp.Models
         public virtual Status Status { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+       
     }
 }

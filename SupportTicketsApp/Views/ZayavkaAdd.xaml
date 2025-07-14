@@ -6,14 +6,98 @@
         xmlns:local="clr-namespace:SupportTicketsApp.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Новая заявка" Height="451" Width="800"
+       
+        Title="Новая заявка" Height="500" Width="860"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
-    <Grid>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft" Width="85">
-            <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
-            
-        </StackPanel>
+        WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded"
+        >
+    <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
         
+        <Grid Margin="15,15,25,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Тема -->
+            <RowDefinition Height="Auto" />
+            <!-- Тип заявки -->
+            <RowDefinition Height="Auto" />
+            <!-- Описание -->
+            <RowDefinition Height="*" />
+            <!-- RichTextBox -->
+            <RowDefinition Height="Auto" />
+            <!-- Кнопки и надпись -->
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Right" Margin="0,-10,-22,10" Height="37" Orientation="Horizontal" FlowDirection="RightToLeft" Width="50" Grid.Column="1">
+            <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+        </StackPanel>
+
+        <!-- Тема -->
+        <TextBlock Text="* Тема" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0" />
+        <TextBox x:Name="TemaTextBox" Margin="0,10,0,10" Height="25" Grid.Row="0" Grid.Column="0" />
+
+        <!-- Тип заявки -->
+        <TextBlock Text="* Тип заявки" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="1" Grid.Column="0" />
+        <ComboBox x:Name="ТипЗаявкиComboBox" Margin="0,20,0,10" Height="25" SelectedIndex="0" Grid.Row="1" Grid.Column="0">
+            <ComboBoxItem Content="Обслуживание" />
+            <!-- Добавьте другие типы заявки -->
+        </ComboBox>
+
+        <!-- Описание -->
+        <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="2" Grid.Column="0" />
+
+        <!-- RichTextBox (с прокруткой) -->
+        <ScrollViewer Grid.Row="3" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <RichTextBox x:Name="OpisanieRichTextBox" Margin="0,0,0,10" MouseDoubleClick="OpisanieRichTextBox_MouseDoubleClick" />
+        </ScrollViewer>
+
+        <!-- Кнопки и надпись -->
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" >
+                <Button Content="Вставить из буфера" Click="InsertImageFromClipboardButton_Click" Margin="5" />
+                <Button Content="Вставить из файла" Click="InsertImageFromFileButton_Click" Margin="5" />
+            </StackPanel>
+            <Button Content="Создать" Width="100" Height="30" Margin="10,0,0,0" Background="#4CAF50" Foreground="White" BorderBrush="Transparent" Click="CreateButton_Click" />
+
+        </StackPanel>
+
+        <!-- Правая колонка -->
+        <StackPanel Grid.Column="1" Grid.RowSpan="5" Margin="20,0,0,0">
+
+            <!-- Клиент -->
+            <TextBlock Text="Клиент" FontWeight="Bold" Margin="0,0,0,5" />
+            <ComboBox x:Name="КлиентComboBox" Margin="0,0,0,10" Height="25" SelectedIndex="0">
+                <ComboBoxItem Content="Не указано" />
+                <!-- Заполните клиентами -->
+            </ComboBox>
+            <Button Content="Создать" Width="90" Height="25" Margin="0,0,0,10" Background="#F44336" Foreground="White" BorderBrush="Transparent" />
+
+            <!-- Ответственный сотрудник -->
+            <TextBlock Text="Ответственный сотрудник" FontWeight="Bold" Margin="0,0,0,5" />
+            <ComboBox x:Name="ОтветственныйComboBox" Margin="0,0,0,10" Height="25" SelectedIndex="0">
+                <ComboBoxItem Content="Без ответственного" />
+                <!-- Заполните сотрудниками -->
+            </ComboBox>
+
+            <!-- Плановая дата решения -->
+            <TextBlock Text="Плановая дата решения" FontWeight="Bold" Margin="0,0,0,5" />
+            <DatePicker x:Name="ПлановаяДатаDatePicker" Margin="0,0,0,10" Height="25" />
+
+            <Button Content="Указать вручную" Width="150" Height="25" Margin="0,0,0,10" Background="#F44336" Foreground="White" BorderBrush="Transparent" />
+
+            <!-- Приоритет -->
+            <TextBlock Text="* Приоритет" FontWeight="Bold" Margin="0,0,0,5" />
+            <ComboBox x:Name="ПриоритетComboBox" Margin="0,0,0,10" Height="25" SelectedIndex="1">
+                <ComboBoxItem Content="Высокий" />
+                <ComboBoxItem Content="Низкий" />
+                <!-- Добавьте другие приоритеты -->
+            </ComboBox>
+            <TextBlock Text="* — обязательное поле" FontSize="10" Foreground="Gray" VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+        </StackPanel>
     </Grid>
+    </Border>
 </Window>

@@ -56,6 +56,7 @@ namespace SupportTicketsApp.Views
         {
             _viewModel.Login = LoginTextBox.Text;
             _viewModel.Password = PasswordBox.Password;
+           
 
             // Проверка подключения к базе данных
             if (!IsDatabaseConnected())
@@ -79,7 +80,7 @@ namespace SupportTicketsApp.Views
                             MainWindow mainWindow = new MainWindow();
                             mainWindow.Show();
                         }
-                        else if (employee.Role == "Инженер")
+                        else if (employee.Role == "Ведущий")
                         {
                             EmployeeDashboardWindow dashboardWindow = new EmployeeDashboardWindow(employee.EmployeeId);
                             dashboardWindow.Show();
