@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 mc:Ignorable="d"
        
-Title="Заявка" Height="500" Width="860"
+Title="Заявка" Height="450" Width="860"
 WindowStartupLocation="CenterScreen"
 WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded"
 >
@@ -19,36 +19,63 @@ WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded"
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Right" Margin="0,-10,2,10" Height="37" Orientation="Horizontal" FlowDirection="RightToLeft" Width="50" Grid.Column="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel HorizontalAlignment="Right" Margin="0,-10,2,10" Height="37" Orientation="Horizontal" FlowDirection="RightToLeft" Width="50" Grid.Column="1">
             <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
         </StackPanel>
 
         <TextBlock Text="Детали заявки" FontSize="18" FontWeight="Bold" Margin="0,0,30,10"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,5">
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,5">
             <TextBlock Text="Номер заявки: " FontWeight="Bold"/>
             <TextBlock Text="{Binding TicketId}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,5">
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,0,0,5">
             <TextBlock Text="Тема: " FontWeight="Bold"/>
             <TextBlock Text="{Binding Title}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,5">
+        <StackPanel Grid.Row="3" Grid.Column="0"  Orientation="Horizontal" Margin="0,0,0,5">
             <TextBlock Text="Клиент: " FontWeight="Bold"/>
             <TextBlock Text="{Binding ClientName}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,5">
+        <StackPanel Grid.Row="4" Grid.Column="0"  Orientation="Horizontal" Margin="0,0,0,5">
             <TextBlock Text="Ответственный: " FontWeight="Bold"/>
             <TextBlock Text="{Binding EmployeeFullName}"/>
         </StackPanel>
 
-        <TextBlock Grid.Row="5" Text="Описание:" FontWeight="Bold" Margin="0,0,0,5"/>
-        <TextBlock Grid.Row="5" Text="{Binding Description}" TextWrapping="Wrap"/>
+        <TextBlock Grid.Row="5"  Grid.Column="0" Text="Описание:" FontWeight="Bold" Margin="0,0,0,5"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding Description}" TextWrapping="Wrap"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,5">
+            <TextBlock Text="Статус: " FontWeight="Bold"/>
+            <ComboBox x:Name="Combo" Width="100" SelectedItem="1">
+                <ComboBoxItem Content="Открыта" />
+                <ComboBoxItem Content="В работе" />
+                <ComboBoxItem Content="Ожидание" />
+                <ComboBoxItem Content="Решена" />
+                <ComboBoxItem Content="Закрыта" />
+            </ComboBox>
+               
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" >
+                <Button Content="Изменить" Margin="5" />
+            </StackPanel>
+            <Button Content="Сохранить" Width="100" Height="30" Margin="10,0,0,0" Background="#4CAF50" Foreground="White" BorderBrush="Transparent" />
+
+        </StackPanel>
 
         <!--  Add more details as needed -->
     </Grid>

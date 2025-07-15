@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Добро пожаловать, [Имя сотрудника]!" Margin="10" FontSize="16" FontWeight="Bold"/>
+        <TextBlock Text="Добро пожаловать!" Margin="10" FontSize="16" FontWeight="Bold"/>
 
         <DataGrid Grid.Row="1" Name="TicketsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>

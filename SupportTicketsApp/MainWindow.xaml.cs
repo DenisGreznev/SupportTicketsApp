@@ -26,15 +26,11 @@ namespace SupportTicketsApp
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public Employee LoggedInEmployee { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded; // Подписываемся на событие Loaded
-                                              // TODO: Получите логин авторизованного пользователя из вашей системы аутентификации
-
-            // Найдите TextBox в XAML и установите его текст
             textlogin.Text = UserSession.LoggedInUser;
         }
        
@@ -42,7 +38,7 @@ namespace SupportTicketsApp
         {
             if (LoggedInEmployee != null)
             {
-                textlogin.Text = LoggedInEmployee.Login; // Изменяем текст кнопки
+                textlogin.Text = LoggedInEmployee.Login;
             }
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -67,30 +63,23 @@ namespace SupportTicketsApp
 
         private void rdZayavki_Click(object sender, RoutedEventArgs e)
         {
-            // PagesNavigation.Navigate(new HomePage());
-
             PagesNavigation.Navigate(new System.Uri("Pages/ZayavkiPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdKlients_Click(object sender, RoutedEventArgs e)
         {
-            // PagesNavigation.Navigate(new HomePage());
-
             PagesNavigation.Navigate(new System.Uri("Pages/Klients.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdSotrudniki_Click(object sender, RoutedEventArgs e)
         {
-            // PagesNavigation.Navigate(new HomePage());
 
             PagesNavigation.Navigate(new System.Uri("Pages/SotrPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdOtch_Click(object sender, RoutedEventArgs e)
         {
-            // PagesNavigation.Navigate(new HomePage());
-
-            PagesNavigation.Navigate(new System.Uri("Pages/OtchPage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/ExcelPage.xaml", UriKind.RelativeOrAbsolute));
         }
         private void home_Loaded_1(object sender, RoutedEventArgs e)
         {
@@ -103,7 +92,6 @@ namespace SupportTicketsApp
             if (MessageBox.Show("Вы действительно хотите выйти?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
-
             }
             else
             {
@@ -119,8 +107,6 @@ namespace SupportTicketsApp
         {
             // 1. Затемняем фон
             this.IsEnabled = false; // Отключаем главное окно (это делает его неактивным)
-            // Можно использовать эффект размытия, но это может снижать производительность:
-            // Effect = new BlurEffect() { Radius = 10 };
             Effect = new BlurEffect() { Radius = 10 };
             // 2. Создаем и показываем окно ZayavkaAdd как модальное
             ZayavkaAdd zayavkaAddWindow = new ZayavkaAdd();
@@ -130,14 +116,10 @@ namespace SupportTicketsApp
             
             // 3.  После закрытия ZayavkaAddWindow
             this.IsEnabled = true;  // Включаем главное окно обратно
-            //  Удаляем эффект размытия, если он был
-            // Effect = null;
+            //  Удаляем эффект размытия
             Effect = null;
-            // 4.  Обработка результата, если необходимо (например, если ZayavkaAddWindow
-            //    возвращает результат, указывающий на успешное сохранение данных)
             if (result == true)
             {
-                // Обработка успешного сохранения (если применимо)
             }
         }
         public static class EmployeeContext

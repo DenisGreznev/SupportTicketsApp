@@ -80,7 +80,7 @@ namespace SupportTicketsApp.Views
                             MainWindow mainWindow = new MainWindow();
                             mainWindow.Show();
                         }
-                        else if (employee.Role == "Ведущий")
+                        else if (employee.Role == "Ведущий специалист")
                         {
                             EmployeeDashboardWindow dashboardWindow = new EmployeeDashboardWindow(employee.EmployeeId);
                             dashboardWindow.Show();

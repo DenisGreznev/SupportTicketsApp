@@ -67,5 +67,10 @@ namespace SupportTicketsApp.Pages
         {
 
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

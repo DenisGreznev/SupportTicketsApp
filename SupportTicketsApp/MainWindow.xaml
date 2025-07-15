@@ -55,8 +55,8 @@
                         <RadioButton x:Name="rdZayavki" FontSize="18" IsChecked="True"  Content="Заявки" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource payment}" Margin="0 5 0 5" Click="rdZayavki_Click" Cursor="Hand"/>
                         <RadioButton x:Name="rdKlients" FontSize="18"  Content="Клиенты"  Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource headphones}" Click="rdKlients_Click" Cursor="Hand"/>
                     
-                        <RadioButton x:Name="rdSotrudniki" FontSize="18" Content="Сотрудники" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource products}" Margin="0 5 0 5" Click="rdSotrudniki_Click"/>
-                        <RadioButton x:Name="rdOtch" FontSize="18" Content="Отчеты" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource supplier}" Margin="0 5 0 5" Click="rdOtch_Click" Cursor="Hand"/>
+                        <RadioButton x:Name="rdSotrudniki" FontSize="18" Content="Сотрудники" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource restore}" Margin="0 5 0 5" Click="rdSotrudniki_Click"/>
+                        <RadioButton x:Name="rdOtch" FontSize="18" Content="Отчеты" Style="{DynamicResource MenuRadioButtonStyle}" Tag="{DynamicResource  notes}" Margin="0 5 0 5" Click="rdOtch_Click" Cursor="Hand"/>
                         
                     </StackPanel>
                 </Grid>

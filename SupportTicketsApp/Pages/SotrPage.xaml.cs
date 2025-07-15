@@ -67,5 +67,10 @@ namespace SupportTicketsApp.Pages
                 datagrid.ItemsSource = dbContext.Employees.ToList();
             }
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

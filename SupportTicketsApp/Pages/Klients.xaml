@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SupportTicketsApp.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d" 
       d:DesignHeight="674.938" d:DesignWidth="1185.3" Background="{DynamicResource SecundaryBackgroundColor}"
       Title="KlientsPage">
@@ -29,10 +30,20 @@ Width="150" Height="35" Click="buttondobklient_Click"   />
                 <DataGrid HorizontalAlignment="Left" AutoGenerateColumns="False" x:Name="datagrid" Height="310" Width="NaN" IsReadOnly="True" Background="{DynamicResource SecundaryBackgroundColor}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер клиента" Binding="{Binding ClientId}" Width="SizeToHeader"/>
-                        <DataGridTextColumn Header="Название" Binding="{Binding ClientName}" Width="*"/>
-                        <DataGridTextColumn Header="Контактное лицо" Binding="{Binding ContactPerson}" Width="*"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
-                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="SizeToHeader"/>
+                        <DataGridTextColumn Header="Название" Binding="{Binding ClientName}" Width="200"/>
+                        <DataGridTextColumn Header="Контактное лицо" Binding="{Binding ContactPerson}" Width="200"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="*"/>
+                        <DataGridTemplateColumn Width="Auto" Header="Действия">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Background="Transparent" BorderBrush="Transparent" Click="EditButton_Click" Tag="{Binding ClientId}" Padding="0">
+                                        <fa:FontAwesome Icon="Gear" FontSize="30" Background="Transparent" Foreground="Gray"/>
+                                        <!-- Используем FontAwesome -->
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
